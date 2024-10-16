@@ -3,27 +3,27 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class CharacterAnimator : MonoBehaviour
 {
+    [SerializeField] private PlayerInputController _playerInputController;
+
     private Animator _animator;
 
     private bool _isMoving;
+    private int _zeroSpeed = 0;
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();        
     }
 
     private void FixedUpdate()
     {
         PlaysWalkingAnimation();
     }
-    
+
     private void PlaysWalkingAnimation()
     {
-        if (Input.GetAxis("Horizontal") == 0)
-            _isMoving = false;
-        else
-            _isMoving = true;
+        _isMoving = _playerInputController.Moving != _zeroSpeed;
 
-        _animator.SetBool("IsMoving", _isMoving);
+        _animator.SetBool(PlayerAnimatorData.Params.IsMoving, _isMoving);
     }
 }

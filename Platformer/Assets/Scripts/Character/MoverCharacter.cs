@@ -2,11 +2,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
-public class MovementCharacter : MonoBehaviour
+public class MoverCharacter : MonoBehaviour
 {
+    [SerializeField] private ControllerGroundPosition _controllerGroundPosition;
+    [SerializeField] private PlayerInputController _controllerInput;
+
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
-    [SerializeField] CheckGround _checkGround;
 
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody;
@@ -19,11 +21,6 @@ public class MovementCharacter : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
-
     private void Update()
     {
         Move();
@@ -32,17 +29,15 @@ public class MovementCharacter : MonoBehaviour
 
     private void Move()
     {
-        float moving = Input.GetAxis("Horizontal");
+        transform.position += transform.right * _controllerInput.Moving * _speed * Time.deltaTime;
 
-        transform.position += transform.right * moving * _speed * Time.deltaTime;
-
-        if (moving != 0 ? true : false)
-            _spriteRenderer.flipX = moving < 0 ? true : false;
+        if (_controllerInput.Moving != 0)
+            _spriteRenderer.flipX = _controllerInput.Moving < 0;
     }
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _checkGround.IsGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && _controllerGroundPosition.IsGrounded)
             _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CheckGround : MonoBehaviour
+public class ControllerGroundPosition : MonoBehaviour
 {
     public bool IsGrounded { get; private set; }
 
