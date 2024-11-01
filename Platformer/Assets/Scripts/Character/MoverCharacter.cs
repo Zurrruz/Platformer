@@ -1,24 +1,24 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(SpriteRenderer))]
 public class MoverCharacter : MonoBehaviour
 {
     [SerializeField] private ControllerGroundPosition _controllerGroundPosition;
-    [SerializeField] private PlayerInputController _controllerInput;
+    [SerializeField] private InputParameters _inputParameters;
 
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
 
-    private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody;
+
+    private Vector3 _lookLeft = new(-1, 1, 1);
+    private Vector3 _lookRight = new(1, 1, 1);
 
     private bool _isMoving;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -29,10 +29,15 @@ public class MoverCharacter : MonoBehaviour
 
     private void Move()
     {
-        transform.position += transform.right * _controllerInput.Moving * _speed * Time.deltaTime;
+        transform.position += transform.right * _inputParameters.Moving * _speed * Time.deltaTime;
 
-        if (_controllerInput.Moving != 0)
-            _spriteRenderer.flipX = _controllerInput.Moving < 0;
+        if (_inputParameters.Moving != 0)
+        {
+            if (_inputParameters.Moving < 0)
+                transform.localScale = _lookLeft;
+            else 
+                transform.localScale = _lookRight;
+        }
     }
 
     private void Jump()
