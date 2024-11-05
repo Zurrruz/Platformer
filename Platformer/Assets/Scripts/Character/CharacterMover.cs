@@ -3,13 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterMover : MonoBehaviour
 {
-    [SerializeField] private ControllerGroundPosition _controllerGroundPosition;
+    [SerializeField] private GroundDetector _groundDetector;
     [SerializeField] private InputParameters _inputParameters;
 
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
 
-    private bool _isJump = false;
+    private bool _canJump = false;
 
     private Rigidbody2D _rigidbody;
 
@@ -31,7 +31,7 @@ public class CharacterMover : MonoBehaviour
     private void Update()
     {
         Move();
-        CheckAvailabilityJump();
+        AllowsJump();
     }
 
     private void Move()
@@ -47,18 +47,18 @@ public class CharacterMover : MonoBehaviour
         }
     }
 
-    private void CheckAvailabilityJump()
+    private void AllowsJump()
     {
-        if (_inputParameters.IsJump && _controllerGroundPosition.IsGrounded)
-            _isJump = true;
+        if (_inputParameters.IsJump && _groundDetector.IsGrounded)
+            _canJump = true;
     }
 
     private void Jump()
     {
-        if (_isJump)
+        if (_canJump)
         {
             _rigidbody.AddForce(Vector2.up * _jumpForce);
-            _isJump= false;
+            _canJump= false;
         }
     }
 }

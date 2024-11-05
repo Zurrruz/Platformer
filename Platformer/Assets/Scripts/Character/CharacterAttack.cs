@@ -30,7 +30,7 @@ public class CharacterAttack : MonoBehaviour
     {
         _detectorEnemy.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return null;
 
         if (_detectorEnemy.Enemy != null)
             _detectorEnemy.Enemy.TakeDamage(_damage);

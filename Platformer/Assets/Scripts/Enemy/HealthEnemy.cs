@@ -8,9 +8,6 @@ public class HealthEnemy : MonoBehaviour
     {
         _health -= damage;
 
-        Debug.Log("получил урон");
-        Debug.Log("осталось " + _health + " жизней");
-
         if (_health <= 0)
             Destroy(gameObject);
     }

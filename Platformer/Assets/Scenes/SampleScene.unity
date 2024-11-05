@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be19b30b136a25343b40887aa861b4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controllerGroundPosition: {fileID: 1534471092}
+  _groundDetector: {fileID: 1534471094}
   _inputParameters: {fileID: 346710776}
   _speed: 7
   _jumpForce: 1200
@@ -1847,7 +1847,7 @@ GameObject:
   - component: {fileID: 1272598198}
   - component: {fileID: 1272598197}
   - component: {fileID: 1272598199}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3507,8 +3507,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1534471091}
-  - component: {fileID: 1534471092}
   - component: {fileID: 1534471093}
+  - component: {fileID: 1534471094}
   m_Layer: 0
   m_Name: CheckGround
   m_TagString: Untagged
@@ -3531,18 +3531,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 346710766}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1534471092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1534471090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17e28c8d4309a4048a6cd6d6bd20736b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1534471093
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3588,6 +3576,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.18335819, y: 0.092484474}
   m_EdgeRadius: 0
+--- !u!114 &1534471094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534471090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6239840b6e708ce4e8d93922ca426258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layerGround: 6
 --- !u!1 &1634907541
 GameObject:
   m_ObjectHideFlags: 0
@@ -3904,6 +3905,7 @@ GameObject:
   - component: {fileID: 7086679784876819389}
   - component: {fileID: 7086679784876819390}
   - component: {fileID: 7086679784876819391}
+  - component: {fileID: 7086679784876819392}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -4245,6 +4247,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moverEnemy: {fileID: 2510734175374425911}
   _attackEnemy: {fileID: 7086679784876819389}
+--- !u!114 &7086679784876819392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360441744601569849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876d1f9e62eec0f40a6c21ea25caaa4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 5
 --- !u!114 &7796382246399174480
 MonoBehaviour:
   m_ObjectHideFlags: 0
