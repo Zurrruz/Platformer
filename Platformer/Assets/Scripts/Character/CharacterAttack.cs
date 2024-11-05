@@ -5,11 +5,12 @@ public class CharacterAttack : MonoBehaviour
 {
     [SerializeField] private InputParameters _playerInputController;
     [SerializeField] private DetectorEnemy _detectorEnemy;
+    [SerializeField] private CooldownAttack _cooldownAttack;
     [SerializeField] private int _damage;
 
     private void Awake()
     {
-        _detectorEnemy.gameObject.SetActive(false);
+        _detectorEnemy.gameObject.SetActive(false); 
     }
 
     private void Update()
@@ -19,11 +20,13 @@ public class CharacterAttack : MonoBehaviour
 
     private void Assault()
     {
-        if (_playerInputController.IsAttacking)
+        if (_playerInputController.IsAttacking && _cooldownAttack.CanAttack)
+        {
             StartCoroutine(DealDamage());
+        }
     }
 
-    IEnumerator DealDamage()
+    private IEnumerator DealDamage()
     {
         _detectorEnemy.gameObject.SetActive(true);
 
@@ -31,6 +34,8 @@ public class CharacterAttack : MonoBehaviour
 
         if (_detectorEnemy.Enemy != null)
             _detectorEnemy.Enemy.TakeDamage(_damage);
+
+        _cooldownAttack.StartRecharge();
 
         _detectorEnemy.gameObject.SetActive(false);
     }

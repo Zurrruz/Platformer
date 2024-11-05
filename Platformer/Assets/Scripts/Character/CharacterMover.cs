@@ -1,13 +1,15 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class MoverCharacter : MonoBehaviour
+public class CharacterMover : MonoBehaviour
 {
     [SerializeField] private ControllerGroundPosition _controllerGroundPosition;
     [SerializeField] private InputParameters _inputParameters;
 
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
+
+    private bool _isJump = false;
 
     private Rigidbody2D _rigidbody;
 
@@ -21,10 +23,15 @@ public class MoverCharacter : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
+    private void FixedUpdate()
+    {
+        Jump();
+    }
+
     private void Update()
     {
         Move();
-        Jump();
+        CheckAvailabilityJump();
     }
 
     private void Move()
@@ -40,9 +47,18 @@ public class MoverCharacter : MonoBehaviour
         }
     }
 
+    private void CheckAvailabilityJump()
+    {
+        if (_inputParameters.IsJump && _controllerGroundPosition.IsGrounded)
+            _isJump = true;
+    }
+
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _controllerGroundPosition.IsGrounded)
-            _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
+        if (_isJump)
+        {
+            _rigidbody.AddForce(Vector2.up * _jumpForce);
+            _isJump= false;
+        }
     }
 }

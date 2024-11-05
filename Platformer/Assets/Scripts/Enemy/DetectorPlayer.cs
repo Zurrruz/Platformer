@@ -8,7 +8,7 @@ public class DetectorPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out InputParameters character))
+        if (collision.TryGetComponent(out HealthCharacter character))
         {
             StartedPursuit?.Invoke(character.gameObject.transform);
         }        
@@ -16,7 +16,7 @@ public class DetectorPlayer : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out InputParameters character))
+        if (collision.TryGetComponent<HealthCharacter>(out _))
             FinishedPursuit?.Invoke();
     }
 }

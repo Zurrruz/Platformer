@@ -3,8 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class EnemyAnimator : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
-    [SerializeField] private AttackEnemy _attackEnemy;    
+    [SerializeField] private AttackTriggerEnemy _attackTrigger;
+    [SerializeField] private Animator _animator; 
 
     public bool _isAttack;
 
@@ -13,14 +13,32 @@ public class EnemyAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        PlaysAttackAnimation();
+        _attackTrigger.Attacking += StartAttackAnimation;
+        _attackTrigger.StoppedAttacking += StopAttackAnimation;
+    }
+
+    private void OnDisable()
+    {
+        _attackTrigger.Attacking -= StartAttackAnimation;
+        _attackTrigger.StoppedAttacking -= StopAttackAnimation;
     }
 
     private void PlaysAttackAnimation()
-    {
-        _isAttack = _attackEnemy.IsAttack;
+    {        
         _animator.SetBool(PlayerAnimatorData.Params.IsAttack, _isAttack);
+    }
+
+    private void StartAttackAnimation(HealthCharacter character)
+    {
+        _isAttack = true;
+        PlaysAttackAnimation();
+    }
+
+    private void StopAttackAnimation()
+    {
+        _isAttack = false;
+        PlaysAttackAnimation();
     }
 }

@@ -1,17 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _health;
+    [SerializeField] private PatrolEnemy _patrolEnemy;
+    [SerializeField] private Pursuit _pursuit;
+    [SerializeField] private DetectorPlayer _detectorPlayer;
 
-    public void TakeDamage(int damage)
+    private void Start()
     {
-        _health -= damage;
+        _patrolEnemy.StartPatrolling();
+        _pursuit.StopPursuit();
+    }
 
-        Debug.Log("получил урон");
-        Debug.Log("осталось " + _health + " жизней");
+    private void OnEnable()
+    {
+        _detectorPlayer.StartedPursuit += ChasePlayer;
+        _detectorPlayer.FinishedPursuit += ReturnsPatrol;
+    }
 
-        if (_health <= 0)
-            Destroy(gameObject);
+    private void OnDisable()
+    {
+        _detectorPlayer.StartedPursuit -= ChasePlayer;
+        _detectorPlayer.FinishedPursuit -= ReturnsPatrol;
+    }
+
+    private void ChasePlayer(Transform target)
+    {
+        _patrolEnemy.StopPatrolling();
+        _pursuit.AssignsTargetPursuit(target);
+    }
+
+    private void ReturnsPatrol()
+    {
+        _pursuit.StopPursuit();
+        _patrolEnemy.StartPatrolling();
     }
 }

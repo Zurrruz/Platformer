@@ -4,6 +4,7 @@ using UnityEngine;
 public class CharacterAnimator : MonoBehaviour
 {
     [SerializeField] private InputParameters _inputParameters;
+    [SerializeField] private CooldownAttack _cooldownAttack;
 
     private Animator _animator;
 
@@ -13,7 +14,7 @@ public class CharacterAnimator : MonoBehaviour
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();        
+        _animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -37,6 +38,7 @@ public class CharacterAnimator : MonoBehaviour
     {
         _isAttack = _inputParameters.IsAttacking;
 
-        _animator.SetBool(PlayerAnimatorData.Params.IsAttack, _isAttack);
+        if (_cooldownAttack.CanAttack)
+            _animator.SetBool(PlayerAnimatorData.Params.IsAttack, _isAttack);
     }
 }

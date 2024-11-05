@@ -5,7 +5,7 @@ public class AttackEnemy : MonoBehaviour
 {
     [SerializeField] private AttackTriggerEnemy _attackTrigger;
     [SerializeField] private int _damage;
-    [SerializeField] private float _attackInterval;
+    [SerializeField] private float _delay;
 
     private WaitForSeconds _timeout;
 
@@ -15,7 +15,7 @@ public class AttackEnemy : MonoBehaviour
 
     private void Awake()
     {
-        _timeout = new WaitForSeconds(_attackInterval);
+        _timeout = new WaitForSeconds(_delay);
     }
 
     private void OnEnable()
@@ -30,10 +30,10 @@ public class AttackEnemy : MonoBehaviour
         _attackTrigger.StoppedAttacking -= StopAttacking;
     }
 
-    private void Attacking(Character character)
+    private void Attacking(HealthCharacter character)
     {
         IsAttack = true;
-        _enumerator = StartCoroutine(RT(character));
+        _enumerator = StartCoroutine(Delay(character));
     }
 
     private void StopAttacking()
@@ -42,7 +42,7 @@ public class AttackEnemy : MonoBehaviour
         StopCoroutine(_enumerator);
     }
 
-    private IEnumerator RT(Character character)
+    private IEnumerator Delay(HealthCharacter character)
     {
         while (enabled)
         {
