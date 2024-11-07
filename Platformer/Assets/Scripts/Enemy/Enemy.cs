@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -11,19 +9,19 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _patrolEnemy.StartPatrolling();
-        _pursuit.StopPursuit();
+        _pursuit.StopPursue();
     }
 
     private void OnEnable()
     {
         _detectorPlayer.StartedPursuit += ChasePlayer;
-        _detectorPlayer.FinishedPursuit += ReturnsPatrol;
+        _detectorPlayer.FinishedPursuit += ReturnPatrol;
     }
 
     private void OnDisable()
     {
         _detectorPlayer.StartedPursuit -= ChasePlayer;
-        _detectorPlayer.FinishedPursuit -= ReturnsPatrol;
+        _detectorPlayer.FinishedPursuit -= ReturnPatrol;
     }
 
     private void ChasePlayer(Transform target)
@@ -32,9 +30,9 @@ public class Enemy : MonoBehaviour
         _pursuit.AssignsTargetPursuit(target);
     }
 
-    private void ReturnsPatrol()
+    private void ReturnPatrol()
     {
-        _pursuit.StopPursuit();
+        _pursuit.StopPursue();
         _patrolEnemy.StartPatrolling();
     }
 }

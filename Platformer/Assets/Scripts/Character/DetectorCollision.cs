@@ -7,13 +7,16 @@ public class DetectorCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent(out MedicineBox medicineBox))
+        if (collision.TryGetComponent(out Item item))
         {
-            Picked?.Invoke(medicineBox);
-            Destroy(medicineBox.gameObject);
-        }
+            if (item is MedicineBox medicineBox)
+            {
+                Picked?.Invoke(medicineBox);
+                Destroy(item.gameObject);
+            }
 
-        if (collision.gameObject.TryGetComponent(out Coin coin))
-            coin.Delete();
+            if(item is Coin coin)
+                coin.Delete();
+        }
     }
 }

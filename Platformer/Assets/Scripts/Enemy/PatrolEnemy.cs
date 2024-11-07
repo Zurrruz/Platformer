@@ -14,7 +14,7 @@ public class PatrolEnemy : MonoBehaviour
 
     private void Update()
     {
-        Patrolling();
+        Defend();
     }
 
     private void CompletesPath()
@@ -28,7 +28,7 @@ public class PatrolEnemy : MonoBehaviour
             _numberPoint = ++_numberPoint % _pointsPatrol.Count;
     }
 
-    private void Patrolling()
+    private void Defend()
     {
         if (_canPatrol)
         {

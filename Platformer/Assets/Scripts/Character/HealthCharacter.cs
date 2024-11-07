@@ -2,40 +2,30 @@ using UnityEngine;
 
 public class HealthCharacter : MonoBehaviour
 {
-    [SerializeField] private DetectorCollision _detectorMedicineBox;
-    [SerializeField] private int _maxHealth;
+    [SerializeField] private int _maxValue;
 
-    private float _minHealth = 0;
+    private float _minValue = 0;
 
-    public int Health { get; private set; }
+    public int CurrentValue { get; private set; }
 
     private void Awake()
     {
-        Health = _maxHealth;
-    }
-    private void OnEnable()
-    {
-        _detectorMedicineBox.Picked += ChangesHealth;
-    }
-
-    private void OnDisable()
-    {
-        _detectorMedicineBox.Picked -= ChangesHealth;
-    }
+        CurrentValue = _maxValue;
+    }    
 
     public void TakeDamage(int damage)
     {
         if (damage > 0)
-            Health -= damage;
+            CurrentValue -= damage;
 
-        Mathf.Clamp(Health, _minHealth, _maxHealth);
+        Mathf.Clamp(CurrentValue, _minValue, _maxValue);
     }
 
-    public void ChangesHealth(MedicineBox medicineBox)
+    public void Restore(int value)
     {
-        if (medicineBox.NumberHealingLives > 0)
-            Health += medicineBox.NumberHealingLives;
+        if (value > 0)
+            CurrentValue += value;
 
-        Mathf.Clamp(Health, _minHealth, _maxHealth);
+        Mathf.Clamp(CurrentValue, _minValue, _maxValue);
     }
 }

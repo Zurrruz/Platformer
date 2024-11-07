@@ -1,15 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class CharacterAnimator : MonoBehaviour
 {
     [SerializeField] private InputParameters _inputParameters;
-    [SerializeField] private CooldownAttack _cooldownAttack;
+    [SerializeField] private Cooldown _cooldown;
 
     private Animator _animator;
 
-    private bool _isMoving;
-    private bool _isAttack;
     private int _zeroSpeed = 0;
 
     private void Awake()
@@ -17,28 +16,29 @@ public class CharacterAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void FixedUpdate()
-    {
-        PlaysWalkingAnimation();
-    }
-
     private void Update()
     {
-        PlaysAttackAnimation();
+        PlayAttackAnimation();
+        PlayWalkingAnimation();
     }
 
-    private void PlaysWalkingAnimation()
+    private void PlayWalkingAnimation()
     {
-        _isMoving = _inputParameters.Moving != _zeroSpeed;
-
-        _animator.SetBool(PlayerAnimatorData.Params.IsMoving, _isMoving);
+        _animator.SetBool(PlayerAnimatorData.Params.IsMoving, _inputParameters.Moving != _zeroSpeed);
     }
 
-    private void PlaysAttackAnimation()
+    private void PlayAttackAnimation()
     {
-        _isAttack = _inputParameters.IsAttacking;
+        if (_inputParameters.IsAttacking && _cooldown.CanAttack)
+            StartCoroutine(StartAnimation());
+    }
 
-        if (_cooldownAttack.CanAttack)
-            _animator.SetBool(PlayerAnimatorData.Params.IsAttack, _isAttack);
+    private IEnumerator StartAnimation()
+    {
+        _animator.SetBool(PlayerAnimatorData.Params.IsAttack, _inputParameters.IsAttacking);
+
+        yield return null;
+
+        _animator.SetBool(PlayerAnimatorData.Params.IsAttack, _inputParameters.IsAttacking);
     }
 }

@@ -26,7 +26,7 @@ public class Pursuit : MonoBehaviour
         _canPursue = true;
     }
 
-    public void StopPursuit()
+    public void StopPursue()
     {
         _canPursue = false;
     }
