@@ -9,8 +9,13 @@ public class PatrolEnemy : MonoBehaviour
 
     private Transform _target;
 
-    private int _numberPoint;
+    private int _numberPoint = 0;
     private bool _canPatrol;
+
+    private void Awake()
+    {
+        FixTarget();
+    }
 
     private void Update()
     {
@@ -19,13 +24,19 @@ public class PatrolEnemy : MonoBehaviour
 
     private void CompletesPath()
     {
-        _target = _pointsPatrol[_numberPoint];
-
         Vector3 offset = _target.position - transform.position;
         float squareLength = offset.sqrMagnitude;
 
         if (squareLength < _minDistansSpot * _minDistansSpot)
+        {
             _numberPoint = ++_numberPoint % _pointsPatrol.Count;
+            FixTarget();
+        }
+    }
+
+    private void FixTarget()
+    {
+        _target = _pointsPatrol[_numberPoint];
     }
 
     private void Defend()

@@ -1,16 +1,29 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour
 {
-    [SerializeField] private InputParameters _playerInputController;
+    [SerializeField] private InputReader _playerInputController;
     [SerializeField] private DetectorEnemy _detectorEnemy;
-    [SerializeField] private Cooldown _cooldown;
     [SerializeField] private int _damage;
+    [SerializeField] private float _rechargeTime;
+
+    private float _delayTime = 0.2f;
+
+    private WaitForSeconds _time;
+    private WaitForSeconds _delay;
+
+    public event Action Attaked;
+
+    public bool CanAttack { get; private set; } = true; 
 
     private void Awake()
     {
-        _detectorEnemy.gameObject.SetActive(false); 
+        _detectorEnemy.gameObject.SetActive(false);
+
+        _time = new WaitForSeconds(_rechargeTime);
+        _delay = new WaitForSeconds(_delayTime);
     }
 
     private void Update()
@@ -20,21 +33,41 @@ public class CharacterAttack : MonoBehaviour
 
     private void Assault()
     {
-        if (_playerInputController.IsAttacking && _cooldown.CanAttack)
+        if (_playerInputController.IsAttacking && CanAttack)
+        {
             StartCoroutine(DealDamage());
+
+            Attaked?.Invoke();
+        }    
     }
 
     private IEnumerator DealDamage()
     {
         _detectorEnemy.gameObject.SetActive(true);
 
-        yield return null;
+        yield return _delay;
 
-        if (_detectorEnemy.Enemy != null)
-            _detectorEnemy.Enemy.TakeDamage(_damage);
+        if (_detectorEnemy.HealthEnemy != null)
+            _detectorEnemy.HealthEnemy.TakeDamage(_damage);      
+        
+        _detectorEnemy.Renew();
 
-        _cooldown.StartRecharge();
+        StartRecharge();
 
         _detectorEnemy.gameObject.SetActive(false);
+    }
+
+    public void StartRecharge()
+    {
+        CanAttack = false;
+
+        StartCoroutine(Recharge());
+    }
+
+    private IEnumerator Recharge()
+    {
+        yield return _time;
+
+        CanAttack = true;
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] private HealthCharacter _healthCharacter;
+    [SerializeField] private Health _healthCharacter;
     [SerializeField] private DetectorCollision _detectorMedicineBox;
 
     private void OnEnable()

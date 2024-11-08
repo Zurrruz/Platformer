@@ -172,8 +172,8 @@ GameObject:
   - component: {fileID: 346710771}
   - component: {fileID: 346710775}
   - component: {fileID: 346710776}
-  - component: {fileID: 346710780}
-  - component: {fileID: 346710781}
+  - component: {fileID: 346710782}
+  - component: {fileID: 346710783}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -363,7 +363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputParameters: {fileID: 346710776}
-  _cooldown: {fileID: 346710781}
+  _characterMover: {fileID: 346710769}
+  _characterAttack: {fileID: 346710775}
 --- !u!114 &346710775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,8 +379,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerInputController: {fileID: 346710776}
   _detectorEnemy: {fileID: 1074814684}
-  _cooldown: {fileID: 346710781}
   _damage: 1
+  _rechargeTime: 1
 --- !u!114 &346710776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,7 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _keyCodeAttack: 102
   _keyCodeJump: 32
---- !u!114 &346710780
+--- !u!114 &346710782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -403,11 +404,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 346710763}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b049cb36643f6ed43a4534eb7fdbdfdd, type: 3}
+  m_Script: {fileID: 11500000, guid: edae28292723031498295fd4bd783a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 5
---- !u!114 &346710781
+--- !u!114 &346710783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -416,10 +417,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 346710763}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bc54e5fc5788f6468872442d3cc0468, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d45a468feebdbd4ab1910ba4df50c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rechargeTime: 1
+  _healthCharacter: {fileID: 346710782}
+  _detectorMedicineBox: {fileID: 1200028475}
 --- !u!1 &432981535
 GameObject:
   m_ObjectHideFlags: 0
@@ -3981,7 +3983,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1475561804360141800}
-  - {fileID: 5979682467888956800}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2934645228787414551
@@ -4085,39 +4086,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.055807114, y: -0.18137312}
   m_Size: {x: 1.2513771, y: 2.0605803}
   m_Direction: 0
---- !u!4 &5979682467888956800
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6055920428662808481}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2795949401677154974}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6055920428662808481
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5979682467888956800}
-  - component: {fileID: 9004320633436081139}
-  - component: {fileID: 9004320633436081140}
-  m_Layer: 0
-  m_Name: AttackTrigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!212 &7086679784876819386
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4185,6 +4153,7 @@ MonoBehaviour:
   _patrolEnemy: {fileID: 7086679784876819390}
   _pursuit: {fileID: 7086679784876819391}
   _detectorPlayer: {fileID: 7796382246399174480}
+  _health: {fileID: 7086679784876819392}
 --- !u!114 &7086679784876819388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4197,9 +4166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d1cbb8a068af14182940ac43805378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackTrigger: {fileID: 9004320633436081140}
-  _animator: {fileID: 3051198271797048543}
-  _isAttack: 0
+  _attackEnemy: {fileID: 7086679784876819389}
+  _animator: {fileID: 0}
 --- !u!114 &7086679784876819389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4212,9 +4180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1208c06f54f13418ccf8023b3e866d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackTrigger: {fileID: 9004320633436081140}
+  _detectorPlayer: {fileID: 7796382246399174480}
   _damage: 1
-  _delay: 0
+  _delay: 1
 --- !u!114 &7086679784876819390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4255,10 +4223,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1360441744601569849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 876d1f9e62eec0f40a6c21ea25caaa4e, type: 3}
+  m_Script: {fileID: 11500000, guid: edae28292723031498295fd4bd783a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 5
+  _maxValue: 3
 --- !u!114 &7796382246399174480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4271,6 +4239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16040455342102342a3ec20fb20b287c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxDistanceAttack: 1.3
 --- !u!1 &7892778835604398308
 GameObject:
   m_ObjectHideFlags: 0
@@ -4289,53 +4258,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!58 &9004320633436081139
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6055920428662808481}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.026117053, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.4033229
---- !u!114 &9004320633436081140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6055920428662808481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f620ff6f02fbb4db080067d709e0c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

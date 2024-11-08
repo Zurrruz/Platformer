@@ -4,7 +4,7 @@ using UnityEngine;
 public class CharacterMover : MonoBehaviour
 {
     [SerializeField] private GroundDetector _groundDetector;
-    [SerializeField] private InputParameters _inputParameters;
+    [SerializeField] private InputReader _inputParameters;
 
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
@@ -16,7 +16,7 @@ public class CharacterMover : MonoBehaviour
     private Vector3 _lookLeft = new(-1, 1, 1);
     private Vector3 _lookRight = new(1, 1, 1);
 
-    private bool _isMoving;
+    public bool IsMoving { get; private set; }
 
     private void Awake()
     {
@@ -44,6 +44,12 @@ public class CharacterMover : MonoBehaviour
                 transform.localScale = _lookLeft;
             else 
                 transform.localScale = _lookRight;
+
+            IsMoving = true;
+        }
+        else
+        {
+            IsMoving = false;
         }
     }
 

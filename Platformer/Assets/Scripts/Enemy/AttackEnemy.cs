@@ -1,15 +1,18 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class AttackEnemy : MonoBehaviour
 {
-    [SerializeField] private AttackTriggerEnemy _attackTrigger;
+    [SerializeField] private DetectorPlayer _detectorPlayer;
     [SerializeField] private int _damage;
     [SerializeField] private float _delay;
 
     private WaitForSeconds _timeout;
 
     private Coroutine _enumerator;
+
+    public event Action Attacking;
 
     public bool IsAttack { get; private set; } = false;
 
@@ -20,17 +23,17 @@ public class AttackEnemy : MonoBehaviour
 
     private void OnEnable()
     {
-        _attackTrigger.Attacking += Attacking;
-        _attackTrigger.StoppedAttacking += StopAttacking;
+        _detectorPlayer.Attacking += Assault;
+        _detectorPlayer.StoppedAttacking += StopAttacking;
     }
 
     private void OnDisable()
     {
-        _attackTrigger.Attacking -= Attacking;
-        _attackTrigger.StoppedAttacking -= StopAttacking;
+        _detectorPlayer.Attacking -= Assault;
+        _detectorPlayer.StoppedAttacking -= StopAttacking;
     }
 
-    private void Attacking(HealthCharacter character)
+    private void Assault(Health character)
     {
         IsAttack = true;
         _enumerator = StartCoroutine(Delay(character));
@@ -39,16 +42,19 @@ public class AttackEnemy : MonoBehaviour
     private void StopAttacking()
     {
         IsAttack = false;
-        StopCoroutine(_enumerator);
+
+        if (_enumerator != null)
+            StopCoroutine(_enumerator);
     }
 
-    private IEnumerator Delay(HealthCharacter character)
+    private IEnumerator Delay(Health character)
     {
         while (enabled)
         {
             yield return _timeout;
-
+            
             character.TakeDamage(_damage);
+            Attacking?.Invoke();
         }
     }
 }
