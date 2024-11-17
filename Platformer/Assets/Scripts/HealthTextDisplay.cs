@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class HealthTextDisplay : HealthBar
 {
-    [SerializeField] private TMP_Text _maxHealth;
-    [SerializeField] private TMP_Text _currentHealth;
+    [SerializeField] private TMP_Text _maxValue;
+    [SerializeField] private TMP_Text _currentValue;
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class HealthTextDisplay : HealthBar
 
     public override void Show()
     {
-        _currentHealth.text = _healthCharacter.CurrentValue.ToString();
-        _maxHealth.text = "/ " + _healthCharacter.MaxValue.ToString();
+        _currentValue.text = _healthCharacter.CurrentValue.ToString();
+        _maxValue.text = "/ " + _healthCharacter.MaxValue.ToString();
     }
 }
