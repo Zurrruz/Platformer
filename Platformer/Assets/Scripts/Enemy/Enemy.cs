@@ -17,14 +17,14 @@ public class Enemy : MonoBehaviour
     {
         _detectorPlayer.StartedPursuit += ChasePlayer;
         _detectorPlayer.FinishedPursuit += ReturnPatrol;
-        _health.EndedHealth += Die;
+        _health.Ended += Die;
     }
 
     private void OnDisable()
     {
         _detectorPlayer.StartedPursuit -= ChasePlayer;
         _detectorPlayer.FinishedPursuit -= ReturnPatrol;
-        _health.EndedHealth -= Die;
+        _health.Ended -= Die;
     }
 
     private void ChasePlayer(Health target)
