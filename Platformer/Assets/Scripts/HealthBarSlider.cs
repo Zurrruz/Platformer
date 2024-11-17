@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarSlider : MonoBehaviour
+public class HealthBarSlider : HealthBar
 {
-    [SerializeField] private Health _healthCharacter;
     [SerializeField] private Slider _slider;
 
     private float _step = 0.3f;
@@ -13,7 +12,7 @@ public class HealthBarSlider : MonoBehaviour
         Show();
     }
 
-    private void Show()
+    public override void Show()
     {
         _slider.value = Mathf.MoveTowards(_slider.value, _healthCharacter.CurrentValue / _healthCharacter.MaxValue, _step * Time.deltaTime);
     }

@@ -1,11 +1,10 @@
 using TMPro;
 using UnityEngine;
 
-public class HealthTextDisplay : MonoBehaviour
+public class HealthTextDisplay : HealthBar
 {
     [SerializeField] private TMP_Text _maxHealth;
     [SerializeField] private TMP_Text _currentHealth;
-    [SerializeField] private Health _healthCharacter;
 
     private void Start()
     {
@@ -22,7 +21,7 @@ public class HealthTextDisplay : MonoBehaviour
         _healthCharacter.Changed -= Show;
     }
 
-    private void Show()
+    public override void Show()
     {
         _currentHealth.text = _healthCharacter.CurrentValue.ToString();
         _maxHealth.text = "/ " + _healthCharacter.MaxValue.ToString();
