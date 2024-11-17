@@ -3,6 +3,7 @@ using UnityEngine;
 public class MoverEnemy : MonoBehaviour
 {
     [SerializeField] private int _speed;
+    [SerializeField] private SpriteRenderer _sprite;
 
     private Vector3 _turn = new Vector3(0, 180, 0);
 
@@ -16,8 +17,8 @@ public class MoverEnemy : MonoBehaviour
     private void Rotate(Transform target)
     {
         if (target.position.x > transform.position.x)
-            transform.rotation = Quaternion.Euler(Vector3.zero);
+            _sprite.flipX = false;
         else
-            transform.rotation = Quaternion.Euler(_turn);
+            _sprite.flipX = true;
     }
 }

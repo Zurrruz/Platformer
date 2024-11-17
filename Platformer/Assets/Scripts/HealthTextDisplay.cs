@@ -11,19 +11,9 @@ public class HealthTextDisplay : HealthBar
         Show();
     }
 
-    private void OnEnable()
-    {
-        _healthCharacter.Changed += Show;
-    }
-
-    private void OnDisable()
-    {
-        _healthCharacter.Changed -= Show;
-    }
-
     public override void Show()
     {
-        _currentValue.text = _healthCharacter.CurrentValue.ToString();
-        _maxValue.text = "/ " + _healthCharacter.MaxValue.ToString();
+        _currentValue.text = health.CurrentValue.ToString();
+        _maxValue.text = "/ " + health.MaxValue.ToString();
     }
 }
