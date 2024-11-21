@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 346710776}
   - component: {fileID: 346710782}
   - component: {fileID: 346710783}
+  - component: {fileID: 346710784}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -497,6 +498,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthCharacter: {fileID: 346710782}
   _detectorMedicineBox: {fileID: 1200028475}
+--- !u!114 &346710784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346710763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67512e4513fc1f74d92fc24a7b892a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvas: {fileID: 1182934186}
+  _inputParameters: {fileID: 346710776}
 --- !u!1 &432981535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,7 +1821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1027340994}
   - component: {fileID: 1027340996}
-  - component: {fileID: 1027340995}
+  - component: {fileID: 1027340997}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -1835,20 +1850,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00016785, y: 0.000080109}
   m_SizeDelta: {x: 768, y: 145.8}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1027340995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027340993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e97d2434184562c4d8865f3d72ccb343, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: {fileID: 7086679784876819392}
-  _slider: {fileID: 1027340996}
 --- !u!114 &1027340996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1900,6 +1901,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1027340997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027340993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45017a11e288c4945875cd7fc4b8aa6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: {fileID: 7086679784876819392}
+  Slider: {fileID: 1027340996}
 --- !u!1 &1029530579
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,7 +2138,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.44104767, y: -0.10741353}
+  m_Offset: {x: -0.44104767, y: 0.00069892406}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2134,7 +2149,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.113924, y: 0.2578683}
+  m_Size: {x: 1.113924, y: 0.04164338}
   m_EdgeRadius: 0
 --- !u!1 &1103271240
 GameObject:
@@ -2198,7 +2213,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182934182}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.002, y: 0.002, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4578,7 +4593,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1963167999}
   - component: {fileID: 1963168001}
-  - component: {fileID: 1963168000}
+  - component: {fileID: 1963168002}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -4607,20 +4622,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00016785, y: 0.000080109}
   m_SizeDelta: {x: 768, y: 145.8}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1963168000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963167998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e97d2434184562c4d8865f3d72ccb343, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: {fileID: 346710782}
-  _slider: {fileID: 1963168001}
 --- !u!114 &1963168001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4672,6 +4673,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1963168002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963167998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45017a11e288c4945875cd7fc4b8aa6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: {fileID: 346710782}
+  Slider: {fileID: 1963168001}
 --- !u!1 &2098059052
 GameObject:
   m_ObjectHideFlags: 0
@@ -4871,7 +4886,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.051885605, y: -0.34470028}
+  m_Offset: {x: -0.051885605, y: 0.07695323}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4882,7 +4897,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.399933, y: 1.6894006}
+  m_Size: {x: 8.399933, y: 2.5327077}
   m_EdgeRadius: 0
 --- !u!95 &3051198271797048543
 Animator:
