@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     public event Action Ended;
     public event Action Changed;
 
-    public float MaxValue { get; private set; } = 10f;
+    public float MaxValue { get; private set; } = 20f;
     public float CurrentValue { get; private set; }
 
     private void Awake()
@@ -16,13 +16,13 @@ public class Health : MonoBehaviour
         CurrentValue = MaxValue;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (damage > 0)
         {
             CurrentValue -= damage;
 
-            CurrentValue = Convert.ToInt32(Mathf.Clamp(CurrentValue, _minValue, MaxValue));
+            CurrentValue = Mathf.Clamp(CurrentValue, _minValue, MaxValue);
 
             if (CurrentValue <= 0)
                 Ended?.Invoke();
@@ -31,13 +31,13 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void Restore(int value)
+    public void Restore(float value)
     {
         if (value > 0)
         {
             CurrentValue += value;
 
-            CurrentValue = Convert.ToInt32(Mathf.Clamp(CurrentValue, _minValue, MaxValue));
+            CurrentValue = Mathf.Clamp(CurrentValue, _minValue, MaxValue);
 
             Changed?.Invoke();
         }

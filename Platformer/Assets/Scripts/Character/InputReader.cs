@@ -4,16 +4,11 @@ public class InputReader : MonoBehaviour
 {
     [SerializeField] private KeyCode _keyCodeAttack;
     [SerializeField] private KeyCode _keyCodeJump;
+    [SerializeField] private KeyCode _keyCodeVampirismAttack;
     private string _axis = "Horizontal";
 
-    public float Moving { get; private set; }
-    public bool IsAttacking {  get; private set; }
-    public bool IsJump { get; private set; }
-
-    private void Update()
-    {
-        Moving = Input.GetAxis(_axis);
-        IsAttacking = Input.GetKeyDown(_keyCodeAttack);
-        IsJump = Input.GetKeyDown(_keyCodeJump);
-    }
+    public float Moving => Input.GetAxis(_axis);
+    public bool IsAttacking => Input.GetKeyDown(_keyCodeAttack);
+    public bool IsJump => Input.GetKeyDown(_keyCodeJump);
+    public bool IsVampirismAttack => Input.GetKeyDown(_keyCodeVampirismAttack);
 }

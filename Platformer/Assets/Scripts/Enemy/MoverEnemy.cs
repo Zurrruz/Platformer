@@ -9,7 +9,7 @@ public class MoverEnemy : MonoBehaviour
 
     public void Move(Transform target)
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
 
         Rotate(target);
     }

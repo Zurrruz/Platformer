@@ -5,7 +5,7 @@ public class CharacterAnimator : MonoBehaviour
 {
     [SerializeField] private InputReader _inputParameters;
     [SerializeField] private CharacterMover _characterMover;
-    [SerializeField] private CharacterAttack _characterAttack;
+    [SerializeField] private SwordAttack _swordAttack;
 
     private Animator _animator;
 
@@ -16,12 +16,12 @@ public class CharacterAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        _characterAttack.Attaked += PlayAttackAnimation;
+        _swordAttack.Attaked += PlayAttackAnimation;
     }
 
     private void OnDisable()
     {
-        _characterAttack.Attaked -= PlayAttackAnimation;
+        _swordAttack.Attaked -= PlayAttackAnimation;
     }
 
     private void Update()
